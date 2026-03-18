@@ -1,15 +1,15 @@
 # OpenPubkeyAgent
 
-Application macOS en Swift pour le renouvellement automatique de certificats SSH OpenPubkey.
+macOS Swift application for automatic renewal of OpenPubkey SSH certificates.
 
-## Fonctionnalités prévues
-- Surveillance et renouvellement automatique des certificats SSH OpenPubkey
-- Interface utilisateur native macOS
-- Intégration avec le trousseau d’accès et l’agent SSH
+## Planned Features
+- Monitoring and automatic renewal of OpenPubkey SSH certificates
+- Native macOS user interface
+- Integration with Keychain and SSH agent
 
-## Structure du projet
-- Sources/ : code source Swift
-- Taskfile.yaml : automatisation des tâches
+## Project Structure
+- Sources/: Swift source code
+- Taskfile.yaml: task automation
 
 ## Installation
-Projet Xcode natif. Ouvrez le dossier dans Xcode pour démarrer le développement.
+Native Xcode project. Open the folder in Xcode to start development.
