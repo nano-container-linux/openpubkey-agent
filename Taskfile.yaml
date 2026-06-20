@@ -6,12 +6,12 @@ tasks:
     cmds:
       - task --list
   build:
-    desc: "Compiler l'application Swift (macOS)"
+    desc: "Build the Swift application (macOS)"
     cmds:
       - swift build -c release
 
   run:
-    desc: "Lancer l'exécutable OpenPubkeyAgent (macOS)"
+    desc: "Run the OpenPubkeyAgent executable (macOS)"
     deps: [build]
     cmds:
       - ./.build/release/OpenPubkeyAgent

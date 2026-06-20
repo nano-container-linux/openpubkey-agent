@@ -1,1 +1,5 @@
 .vscode
+.build
+Tools/tmp/
+Tools/tmp/*.bincert_swift.bin
+*.bin

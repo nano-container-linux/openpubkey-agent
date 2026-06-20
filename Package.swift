@@ -7,12 +7,28 @@ let package = Package(
         .macOS(.v13)
     ],
     products: [
-        .executable(name: "OpenPubkeyAgent", targets: ["OpenPubkeyAgent"])
+        .executable(name: "OpenPubkeyAgent", targets: ["OpenPubkeyAgentApp"]),
+        .executable(name: "certgen", targets: ["certgen"]),
     ],
     targets: [
-        .executableTarget(
+        .target(
             name: "OpenPubkeyAgent",
-            path: "Sources"
+            path: "Sources/OpenPubkeyAgentLib"
+        ),
+        .executableTarget(
+            name: "OpenPubkeyAgentApp",
+            dependencies: ["OpenPubkeyAgent"],
+            path: "Sources/App"
+        ),
+        .executableTarget(
+            name: "certgen",
+            dependencies: ["OpenPubkeyAgent"],
+            path: "Tools/CertGen"
+        ),
+        .testTarget(
+            name: "OpenPubkeyAgentTests",
+            dependencies: ["OpenPubkeyAgent"],
+            path: "Tests"
         )
     ]
 )
