@@ -9,3 +9,10 @@ ca_ed25519*
 *.pem
 id_ed25519*
 id_rsa*
+
+# Build outputs. `task build` produces .build/release/OpenPubkeyAgent; nothing
+# reads a committed copy.
+/.build/
+/src/build/
+/src/openpubkey-agent
+/tmp/
