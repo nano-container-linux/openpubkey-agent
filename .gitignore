@@ -3,3 +3,9 @@
 Tools/tmp/
 Tools/tmp/*.bincert_swift.bin
 *.bin
+
+# Never commit key material. Test keys belong in Tests/fixtures/.
+ca_ed25519*
+*.pem
+id_ed25519*
+id_rsa*
