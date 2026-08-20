@@ -1,0 +1,67 @@
+name: CI
+
+# This repository had no CI at all.
+#
+# Its build surface was measured rather than assumed, and it is narrow: the UI
+# is built on progrium/darwinkit, so the module compiles ONLY for darwin and
+# ONLY with cgo enabled. Every other combination fails:
+#
+#   darwin/amd64  cgo=1  ok     darwin/amd64  cgo=0  fails
+#   darwin/arm64  cgo=1  ok     darwin/arm64  cgo=0  fails
+#   linux, windows       fail regardless of cgo
+#
+# So there is no cross-build matrix here -- there is nothing to cross-build to.
+# The two architectures are covered by two native runners instead, which is
+# also how the sibling openweft/weft-driver-vz lane does it. macos-13 is
+# deliberately not used: that image is retired and its jobs are never
+# scheduled, they sit queued for 24h and are auto-cancelled.
+#
+# The module lives in src/, not at the repository root.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: src
+
+jobs:
+  build-test:
+    name: ${{ matrix.runner }} (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-14        # Apple silicon
+            arch: arm64
+          - runner: macos-15-intel  # Intel
+            arch: amd64
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: src/go.mod
+          cache: true
+      - name: vet
+        env:
+          CGO_ENABLED: '1'
+        run: go vet ./...
+      - name: build
+        env:
+          CGO_ENABLED: '1'
+        run: go build ./...
+      - name: test
+        env:
+          CGO_ENABLED: '1'
+        run: go test -count=1 ./...
+      - name: test -race
+        env:
+          CGO_ENABLED: '1'
+        run: go test -race -count=1 ./...
