@@ -74,18 +74,18 @@ func OpenSettingsWindow() {
 	w.SetTitle("OIDC Providers & Keys")
 
 	// Build split view
-	frame := foundation.Rect{Size: foundation.Size{720, 380}}
+	frame := foundation.Rect{Size: foundation.Size{Width: 720, Height: 380}}
 	split := appkit.NewSplitViewWithFrame(frame)
 	split.SetVertical(true)
 	split.SetTranslatesAutoresizingMaskIntoConstraints(false)
 	w.ContentView().AddSubview(split)
 
 	// Left pane: scroll + stack of provider buttons
-	left := appkit.NewViewWithFrame(foundation.Rect{Size: foundation.Size{260, 360}})
+	left := appkit.NewViewWithFrame(foundation.Rect{Size: foundation.Size{Width: 260, Height: 360}})
 	left.SetTranslatesAutoresizingMaskIntoConstraints(false)
-	scroll := appkit.NewScrollViewWithFrame(foundation.Rect{Size: foundation.Size{260, 300}})
+	scroll := appkit.NewScrollViewWithFrame(foundation.Rect{Size: foundation.Size{Width: 260, Height: 300}})
 	scroll.SetHasVerticalScroller(true)
-	contentView := appkit.NewViewWithFrame(foundation.Rect{Size: foundation.Size{240, 300}})
+	contentView := appkit.NewViewWithFrame(foundation.Rect{Size: foundation.Size{Width: 240, Height: 300}})
 	scroll.SetDocumentView(contentView)
 	left.AddSubview(scroll)
 
@@ -97,7 +97,7 @@ func OpenSettingsWindow() {
 	left.AddSubview(removeBtn)
 
 	// Right pane: details
-	right := appkit.NewViewWithFrame(foundation.Rect{Size: foundation.Size{440, 360}})
+	right := appkit.NewViewWithFrame(foundation.Rect{Size: foundation.Size{Width: 440, Height: 360}})
 	right.SetTranslatesAutoresizingMaskIntoConstraints(false)
 
 	titleLbl := appkit.NewLabel("")
